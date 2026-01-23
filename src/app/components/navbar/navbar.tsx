@@ -5,7 +5,7 @@ import SocialLinks from "./social-links-icons/social-links";
 
 export default function Navbar() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent w-full">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
       <div className="mx-auto py-8  w-full">
         <nav className="flex items-center justify-evenly">
           <div className="text-white font-bold text-xl ">
