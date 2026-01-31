@@ -8,9 +8,6 @@ body {
   color: #fff;
   font-family: Inter, system-ui, arial;
 }
-section {
-  padding: 10rem 2rem;
-}
 
 @media (prefers-reduced-motion: reduce) {
   canvas {

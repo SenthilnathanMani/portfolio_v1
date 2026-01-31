@@ -1,4 +1,5 @@
 "use client";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -6,18 +7,24 @@ import { useEffect, useRef } from "react";
 
 export default function Intro() {
   const sectionRef = useRef<HTMLElement | null>(null);
+  const { scrollY } = useScroll();
+  const opacity = useTransform(scrollY, [0, 200], [1, 0]);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
     const el = sectionRef.current;
     if (!el) return;
 
+    const nextEl = el.nextElementSibling as HTMLElement | null;
+
     const anim = gsap.to(el, {
-      height: "400px",
+      y: 200,
       ease: "none",
       scrollTrigger: {
         trigger: el,
         start: "top top",
+        endTrigger: nextEl || undefined,
+        end: nextEl ? "top top" : "bottom top",
         scrub: true,
       },
     });
@@ -40,44 +47,89 @@ export default function Intro() {
     >
       <div className="md:max-w-[70%] mx-auto text-center space-y-8">
         <h1 className="text-5xl md:text-8xl lg:text-8xl font-black leading-none">
-          Hello there, I'm{" "}
-          <div className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent flex space-x-4 flex-wrap justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30, x: -20 }}
+            animate={{ opacity: 1, y: 0, x: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            Hello there, I'm
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4 }}
+            className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent flex space-x-4 flex-wrap justify-center"
+          >
             <span className="break-all">Senthilnathan</span>
-          </div>
+          </motion.div>
         </h1>
-        <div className="text-2xl md:text-3xl text-gray-300 max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-2xl md:text-3xl text-gray-300 max-w-4xl mx-auto"
+        >
           <span className="text-blue-400">Software Engineer</span>{" "}
           <span> crafting digital experiences from </span>{" "}
           <span className="text-green-400 font-semibold">India</span>
-        </div>
-        <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+        </motion.div>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed"
+        >
           I design and build exceptional digital experiences with a focus on
           performance, accessibility, and user delight. Currently building at{" "}
           <span className="text-purple-400">DHL</span>
-        </p>
-        <button
-          onClick={onConnect}
-          className="inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-primary/90 h-11 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 px-8 py-6 text-lg font-semibold rounded-full shadow-lg hover:shadow-purple-500/25 transition-all duration-300 group cursor-pointer"
-          aria-label="Navigate to contact section"
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
         >
-          <span>Let's Connect</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-arrow-right w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform"
-            aria-hidden="true"
+          <button
+            onClick={onConnect}
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-primary/90 h-11 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 px-8 py-6 text-lg font-semibold rounded-full shadow-lg hover:shadow-purple-500/25 transition-all duration-300 group cursor-pointer"
+            aria-label="Navigate to contact section"
           >
-            <path d="M5 12h14"></path>
-            <path d="m12 5 7 7-7 7"></path>
-          </svg>
-        </button>
+            <span>Let's Connect</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-arrow-right w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </button>
+        </motion.div>
+
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 pointer-events-none">
+          <motion.div
+            animate={{ y: 0 }}
+            initial={{ y: -10 }}
+            transition={{
+              type: "spring",
+              bounce: 0.5,
+              duration: 2,
+              repeat: Infinity,
+              repeatType: "mirror",
+            }}
+            className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-2"
+            style={{ opacity }}
+          >
+            <div className="w-1.5 h-1.5 rounded-full bg-white/60"></div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

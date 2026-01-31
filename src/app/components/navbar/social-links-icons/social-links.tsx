@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import GitHub from "./githubIcon";
 import LinkedInIcon from "./linkedIn";
+import MailIcon from "./mailIcon";
 
 export default function SocialLinks() {
   const socialLinks = [
@@ -13,6 +14,11 @@ export default function SocialLinks() {
       name: "LinkedIn",
       url: "https://www.linkedin.com/in/senthilnathan-mani-b7068685/",
       icon: LinkedInIcon,
+    },
+    {
+      name: "Mail",
+      url: "mailto:senthilnathan.mani@gmail.com",
+      icon: MailIcon,
     },
   ];
   return (
