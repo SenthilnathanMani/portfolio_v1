@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Navbar from "./components/navbar/navbar";
 import Intro from "./components/intro/intro";
-import LetsConnect from "./components/letsConnect/letsConnect";
+import LetsConnect from "./components/lets-connect/lets-connect";
 import Legend from "./components/legend/legend";
+import AboutMe from "./components/about-me/about-me";
 
 export default function Home() {
   return (
@@ -11,7 +11,9 @@ export default function Home() {
         <Navbar></Navbar>
         <Intro></Intro>
         <Legend></Legend>
+        <AboutMe></AboutMe>
         <LetsConnect></LetsConnect>
+
         {/* TODO : Remove under construction image after site completion */}
         <img
           src="/under_contruction.png"
