@@ -45,26 +45,35 @@ type CubeProps = {
   opacity?: number;
 };
 
-const Cube: React.FC<CubeProps> = ({ color = "#00d9ff", opacity = 1, ...props }) => {
-    const pivotRef = useRef<Group | null>(null);
-    const meshRef = useRef<Mesh | null>(null);
-    const axis = useMemo(() => new Vector3(1, 1, 1).normalize(), []);
+const Cube: React.FC<CubeProps> = ({
+  color = "#00d9ff",
+  opacity = 1,
+  ...props
+}) => {
+  const pivotRef = useRef<Group | null>(null);
+  const meshRef = useRef<Mesh | null>(null);
+  const axis = useMemo(() => new Vector3(1, 1, 1).normalize(), []);
 
-    useFrame((_, delta) => {
-      if (pivotRef.current) {
-        pivotRef.current.rotateOnAxis(axis, delta * 0.5);
-      }
-    });
+  useFrame((_, delta) => {
+    if (pivotRef.current) {
+      pivotRef.current.rotateOnAxis(axis, delta * 0.5);
+    }
+  });
 
-    return (
-        <group ref={pivotRef} position={[10, 0, -5]} rotation={[0, Math.PI / 2, 0]} {...props}>
-            <mesh ref={meshRef} position={[2, 2, 2]}>
-                <boxGeometry args={[4, 4, 4]} />
-                <meshStandardMaterial color={color} opacity={opacity} />
-                <Edges color="white" />
-            </mesh>
-        </group>
-    );
+  return (
+    <group
+      ref={pivotRef}
+      position={[10, 0, -5]}
+      rotation={[0, Math.PI / 2, 0]}
+      {...props}
+    >
+      <mesh ref={meshRef} position={[2, 2, 2]}>
+        <boxGeometry args={[4, 4, 4]} />
+        <meshStandardMaterial color={color} opacity={opacity} />
+        <Edges color="white" />
+      </mesh>
+    </group>
+  );
 };
 
 export function FloatingTwinklingStars({
@@ -81,7 +90,7 @@ export function FloatingTwinklingStars({
         phase: Math.random() * Math.PI * 2,
         floatSpeed: 0.3 + Math.random() * 0.7,
       })),
-    [count]
+    [count],
   );
 
   return (
@@ -113,7 +122,7 @@ export default function Background() {
         <Canvas camera={{ position: [0, 0, 5] }}>
           <ambientLight intensity={0.1} />
           <FloatingTwinklingStars count={100} />
-       {/*    <Cube /> */}
+          {/*    <Cube /> */}
         </Canvas>
       </div>
     </>
