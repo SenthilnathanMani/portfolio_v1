@@ -14,14 +14,13 @@ export default function Home() {
         <Legend></Legend>
         <AboutMe></AboutMe>
         <LetsConnect></LetsConnect>
-        <Footer></Footer>
-
         {/* TODO : Remove under construction image after site completion */}
         <img
           src="/under_contruction.png"
           alt="Under Construction"
           className="mx-auto"
         ></img>
+        <Footer></Footer>
       </div>
     </main>
   );
