@@ -1,92 +1,113 @@
 "use client";
+import useOnScreen from "@/app/lib/is-visible-hook/intersection-hook";
+import { useRef, useEffect } from "react";
 import Typewriter from "typewriter-effect";
+
+const techStack = [
+  "React",
+  "Angular",
+  "Node.js",
+  "TypeScript",
+  "Tailwind CSS",
+  "Python",
+  "Kotlin",
+  "Azure",
+  "GraphQL",
+  "Android",
+  "Mongo DB",
+  "Next.js",
+  "NX monorepo",
+  "SQL",
+];
+const typeItems = [
+  {
+    text: '<span class="text-blue-400">$ whoami</span>',
+  },
+  { text: "<br/>" },
+  {
+    text: "<span class='text-green-400'>Senthilnathan Mani</span>",
+  },
+  { text: "<br/>" },
+  {
+    text: '<span class="text-purple-400">senthilnathanlab@gmail.com</span>',
+  },
+  { text: "<br/>" },
+  { text: "<br/>" },
+  {
+    text: '<span class="text-blue-400">$ cat personal_info.json</span>',
+  },
+  { text: "<br/>" },
+  { text: '<span class="text-gray-300">{</span>' },
+  { text: "<br/>" },
+  {
+    text: "<span class='text-purple-400'>'name': 'Senthilnathan Mani',</span>",
+  },
+  { text: "<br/>" },
+  {
+    text: "<span class='text-purple-400'>'role': 'Senior Software Engineer',</span>",
+  },
+  { text: "<br/>" },
+  {
+    text: "<span class='text-purple-400'>'location': 'Bangalore, India',</span>",
+  },
+  { text: "<br/>" },
+  {
+    text: "<span class='text-purple-400'>'experience': '8+ years',</span>",
+  },
+  { text: "<br/>" },
+  {
+    text: "<span class='text-purple-400'>'status': 'building_cool_stuff'</span>",
+  },
+  { text: "<br/>" },
+  { text: '<span class="text-gray-300">}</span>' },
+  { text: "<br/>" },
+  { text: "<br/>" },
+  {
+    text: '<span class="text-blue-400">$ echo "Passion for clean code"</span>',
+  },
+  { text: "<br/>" },
+  {
+    text: '<span class="text-green-400">Passion for clean code</span>',
+  },
+  { text: "<br/>" },
+  { text: "<br/>" },
+  {
+    text: '<span class="text-blue-400">$ ls current_projects/</span>',
+  },
+  { text: "<br/>" },
+  {
+    text: "<span class='text-yellow-400'>portfolio/</span>",
+  },
+];
 export default function AboutMe() {
-  const techStack = [
-    "React",
-    "Angular",
-    "Node.js",
-    "TypeScript",
-    "Tailwind CSS",
-    "Python",
-    "Kotlin",
-    "Azure",
-    "GraphQL",
-    "Android",
-    "Mongo DB",
-    "Next.js",
-    "NX monorepo",
-    "SQL",
-  ];
-  const typeItems = [
-    {
-      text: '<span class="text-blue-400">$ whoami</span>',
-    },
-    { text: "<br/>" },
-    {
-      text: "<span class='text-green-400'>Senthilnathan Mani</span>",
-    },
-    { text: "<br/>" },
-    {
-      text: '<span class="text-purple-400">senthilnathanlab@gmail.com</span>',
-    },
-    { text: "<br/>" },
-    { text: "<br/>" },
-    {
-      text: '<span class="text-blue-400">$ cat personal_info.json</span>',
-    },
-    { text: "<br/>" },
-    { text: '<span class="text-gray-300">{</span>' },
-    { text: "<br/>" },
-    {
-      text: "<span class='text-purple-400'>'name': 'Senthilnathan Mani',</span>",
-    },
-    { text: "<br/>" },
-    {
-      text: "<span class='text-purple-400'>'role': 'Senior Software Engineer',</span>",
-    },
-    { text: "<br/>" },
-    {
-      text: "<span class='text-purple-400'>'location': 'Bangalore, India',</span>",
-    },
-    { text: "<br/>" },
-    {
-      text: "<span class='text-purple-400'>'experience': '8+ years',</span>",
-    },
-    { text: "<br/>" },
-    {
-      text: "<span class='text-purple-400'>'status': 'building_cool_stuff'</span>",
-    },
-    { text: "<br/>" },
-    { text: '<span class="text-gray-300">}</span>' },
-    { text: "<br/>" },
-    { text: "<br/>" },
-    {
-      text: '<span class="text-blue-400">$ echo "Passion for clean code"</span>',
-    },
-    { text: "<br/>" },
-    {
-      text: '<span class="text-green-400">Passion for clean code</span>',
-    },
-    { text: "<br/>" },
-    { text: "<br/>" },
-    {
-      text: '<span class="text-blue-400">$ ls current_projects/</span>',
-    },
-    { text: "<br/>" },
-    {
-      text: "<span class='text-yellow-400'>portfolio/</span>",
-    },
-  ];
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const typewriterRef = useRef<any>(null);
+  const startedRef = useRef(false);
+  const visible = useOnScreen(containerRef, {
+    once: true,
+  });
+
+  useEffect(() => {
+    if (visible && typewriterRef.current && !startedRef.current) {
+      try {
+        typewriterRef.current.start();
+      } catch (e) {}
+      startedRef.current = true;
+    }
+    () => {
+      startedRef.current = false;
+      typewriterRef.current = null;
+    };
+  }, [visible]);
 
   const handleTypewriterInit = (typewriter: any) => {
     typeItems.forEach((item) => {
       typewriter.typeString(item.text);
     });
-
-    typewriter.start();
+    typewriterRef.current = typewriter;
   };
   return (
-    <section id="about" className="py-32 px-6">
+    <section id="about" className="py-32 px-6" ref={containerRef}>
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-4">
@@ -157,7 +178,7 @@ export default function AboutMe() {
                 <div className="p-6 font-mono text-sm min-h-[400px] flex flex-col">
                   <div className="flex-1">
                     <Typewriter
-                      options={{ cursor: "", delay: 30 }}
+                      options={{ cursor: "", delay: 50 }}
                       onInit={(typewriter) => {
                         handleTypewriterInit(typewriter);
                       }}

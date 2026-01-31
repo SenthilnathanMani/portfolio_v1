@@ -3,6 +3,7 @@ import Intro from "./components/intro/intro";
 import LetsConnect from "./components/lets-connect/lets-connect";
 import Legend from "./components/legend/legend";
 import AboutMe from "./components/about-me/about-me";
+import { Footer } from "./components/footer/footer";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <Legend></Legend>
         <AboutMe></AboutMe>
         <LetsConnect></LetsConnect>
+        <Footer></Footer>
 
         {/* TODO : Remove under construction image after site completion */}
         <img
