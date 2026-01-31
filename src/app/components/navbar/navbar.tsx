@@ -1,7 +1,6 @@
 "use client";
-import Link from "next/link";
-import NavItem from "./nav-item/navItem";
-import SocialLinks from "./social-links-icons/social-links";
+import NavItem from "../../lib/nav-item/navItem";
+import SocialLinks from "./social-links/social-links";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect } from "react";
 

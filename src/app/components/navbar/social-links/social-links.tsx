@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import GitHub from "./githubIcon";
-import LinkedInIcon from "./linkedIn";
-import MailIcon from "./mailIcon";
+import GitHub from "./social-links-icons/githubIcon";
+import LinkedInIcon from "./social-links-icons/linkedIn";
+import MailIcon from "./social-links-icons/mailIcon";
 
 export default function SocialLinks() {
   const socialLinks = [
