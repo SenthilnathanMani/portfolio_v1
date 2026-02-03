@@ -1,5 +1,6 @@
 "use client";
 import useOnScreen from "@/app/lib/is-visible-hook/intersection-hook";
+import { motion } from "framer-motion";
 import { useRef, useEffect } from "react";
 import Typewriter from "typewriter-effect";
 
@@ -111,7 +112,12 @@ export default function AboutMe() {
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-4">
-            <div className="inline-flex items-center gap-2 bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full text-sm font-medium">
+            <motion.div
+              initial={{ opacity: 0, y: 20, x: -30 }}
+              animate={visible ? { opacity: 1, y: [20, -12, 0], x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              className="inline-flex items-center gap-2 bg-blue-500/10 text-blue-400 px-4 py-2 rounded-full text-sm font-medium"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -129,11 +135,22 @@ export default function AboutMe() {
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
               Bengalure, India
-            </div>
-            <h2 className="text-5xl md:text-6xl font-bold" id="about-heading">
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={visible ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="text-5xl md:text-6xl font-bold"
+              id="about-heading"
+            >
               About Me<span className="text-blue-400">.</span>
-            </h2>
-            <div className="space-y-6 text-lg text-gray-300 leading-relaxed">
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={visible ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="space-y-6 text-lg text-gray-300 leading-relaxed"
+            >
               <p>
                 I'm a passionate{" "}
                 <span className="text-blue-400 font-semibold">
@@ -148,19 +165,32 @@ export default function AboutMe() {
                 where I am part of frontend architecture and mentoring junior
                 developers in Bengalure's thriving tech scene.
               </p>
-            </div>
-            <div className="flex flex-wrap gap-3">
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={visible ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex flex-wrap gap-3"
+            >
               {techStack.map((tech, index) => (
-                <span
+                <motion.span
                   key={index}
+                  initial={{ opacity: 0 }}
+                  animate={visible ? { opacity: 1 } : {}}
+                  transition={{ duration: 0.6, delay: 0.2 * index }}
                   className="px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-sm font-medium text-gray-300 hover:bg-blue-500/20 hover:border-blue-500/30 hover:text-blue-300 transition-all duration-300 cursor-default"
                 >
                   {tech}
-                </span>
+                </motion.span>
               ))}
-            </div>
+            </motion.div>
           </div>
-          <div className="relative">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.3 }}
+            animate={visible ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative"
+          >
             <div className="relative w-full max-w-2xl mx-auto">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-3xl blur-xl"></div>
               <div className="text-card-foreground relative bg-gray-900/95 backdrop-blur-sm border border-gray-700/50 rounded-3xl shadow-2xl overflow-hidden">
@@ -187,7 +217,7 @@ export default function AboutMe() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
