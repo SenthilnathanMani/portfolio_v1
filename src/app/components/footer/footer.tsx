@@ -1,3 +1,5 @@
+import Connect from "./connect-section/connect-section";
+
 const year = new Date().getFullYear();
 export function Footer() {
   return (
@@ -5,6 +7,7 @@ export function Footer() {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
       <div className="relative bg-gradient-to-b from-black/30 to-black/60 backdrop-blur-sm py-20 px-6">
         <div className="max-w-7xl mx-auto">
+          <Connect />
           <div className="pt-8 border-t border-white/10">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <div className="flex items-center gap-2 text-sm text-gray-400">
