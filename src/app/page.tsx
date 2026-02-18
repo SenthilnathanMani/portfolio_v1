@@ -4,6 +4,7 @@ import LetsConnect from "./components/lets-connect/lets-connect";
 import Legend from "./components/legend/legend";
 import AboutMe from "./components/about-me/about-me";
 import { Footer } from "./components/footer/footer";
+import ChatBox from "./components/rag-chat/chatBox";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
           alt="Under Construction"
           className="mx-auto"
         ></img>
+        <ChatBox />
         <Footer></Footer>
       </div>
     </main>

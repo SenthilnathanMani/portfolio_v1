@@ -19,8 +19,6 @@ export async function POST(req: Request) {
 
     const { text } = await req.json();
 
-    console.log("Received text length:", text);
-
     if (!text || typeof text !== "string") {
         return new Response("Invalid payload", { status: 400 });
     }
@@ -31,8 +29,14 @@ export async function POST(req: Request) {
     const chunks = chunkText(text);
 
     for (const chunk of chunks) {
-        const embedding = await getEmbedding(chunk);
-        await Portfolio.create({ content: chunk, embedding });
+        try {
+            const embedding = await getEmbedding(chunk);
+            await Portfolio.create({ content: chunk, embedding });
+        }
+        catch (err) {
+            console.error("Error processing chunk:", { chunk, error: err });
+        }
+
     }
 
     return Response.json({

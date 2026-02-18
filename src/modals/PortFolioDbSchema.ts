@@ -5,4 +5,4 @@ const PortfolioScheme = new mongoose.Schema({
     embedding: [Number],
 });
 
-export default mongoose.models.Portfolio || mongoose.model("Portfolio", PortfolioScheme);
+export default mongoose.models.Portfolio || mongoose.model("Portfolio", PortfolioScheme, "portfolio");
